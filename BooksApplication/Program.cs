@@ -15,13 +15,20 @@ namespace BooksApplication
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddDbContext<BooksContext>();
-            serviceCollection.AddSingleton<Form1>();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var form = serviceProvider.GetRequiredService<Form1>();
+            Services.AddDbContext<BooksContext>();
+            Services.AddSingleton<Form1>();
+            Services.AddTransient<RegistrationForm>();
+            Services.AddTransient<AddClient>();
+            ServiceProvider = Services.BuildServiceProvider();
+            var form = ServiceProvider.GetRequiredService<Form1>();
             Application.Run(form);
             //var f = new Form1();
+        }
+        private static IServiceCollection Services { get; set; } = new ServiceCollection();
+        private static ServiceProvider ServiceProvider { get; set; }
+        public static T GetService<T>()
+        {
+            return (T)ServiceProvider.GetRequiredService<T>();
         }
     }
 }
