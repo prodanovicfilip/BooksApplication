@@ -1,12 +1,15 @@
 using BooksApplication.BLL.Models;
+using BooksApplication.DataAccess;
 
 namespace BooksApplication
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private readonly BooksContext _context;
+        public Form1(BooksContext context)
         {
             InitializeComponent();
+            _context = context;
         }
 
         private void BT_Submit_Click(object sender, EventArgs e)

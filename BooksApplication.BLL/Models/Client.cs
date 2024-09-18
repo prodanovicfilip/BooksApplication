@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BooksApplication.BLL.Models
 {
-    internal class Client : BaseModel
+    public class Client : BaseModel
     {
         public Client(string firstName, string lastName, string address, int phone, string email)
         {

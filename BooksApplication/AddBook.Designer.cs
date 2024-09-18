@@ -121,7 +121,7 @@
             // 
             TB_Desc.Location = new Point(310, 208);
             TB_Desc.Name = "TB_Desc";
-            TB_Desc.Size = new Size(237, 162);
+            TB_Desc.Size = new Size(422, 175);
             TB_Desc.TabIndex = 9;
             TB_Desc.Text = "";
             // 
