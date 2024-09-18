@@ -50,7 +50,6 @@
             button1.TabIndex = 0;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -78,7 +77,6 @@
             label2.Size = new Size(44, 15);
             label2.TabIndex = 3;
             label2.Text = "Author";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
