@@ -1,5 +1,6 @@
 using BooksApplication.BLL.Models;
 using BooksApplication.DataAccess;
+using BooksApplication.DataAccess.Infrastructure;
 using Mapster;
 
 namespace BooksApplication
@@ -7,11 +8,11 @@ namespace BooksApplication
     public partial class Form1 : Form
     {
         //LOGIN
-        private readonly BooksContext _context;
-        public Form1(BooksContext context)
+        private readonly IUserRepository _userRepository;
+        public Form1(IUserRepository userRepository)
         {
             InitializeComponent();
-            _context = context;
+            _userRepository = userRepository;
         }
 
         private void BT_Submit_Click(object sender, EventArgs e)
@@ -24,25 +25,38 @@ namespace BooksApplication
                 MessageBox.Show("Error!");
                 return;
             }
-            var exist = _context.Users.Where(u => u.Username == username).FirstOrDefault();
-            if (exist == null)
+            try
             {
-                MessageBox.Show("Credentials error");
-                return;
+                var exist = _userRepository.UsernameExists(username);
+                if (!exist)
+                {
+                    MessageBox.Show("Error");
+                    return;
+
+                }
+
+                var success = _userRepository.Login(username, password);
+                if(!success)
+                {
+                    MessageBox.Show("Cannot login!");
+                    return;
+                }
+
+                var f = new Main();
+                this.Hide();
+                f.ShowDialog();
             }
-            if (exist.Password != password)
+            catch(Exception ex)
             {
-                MessageBox.Show("Credentials error");
-                return;
+                Console.WriteLine(ex.Message);
+                // Loguje error
             }
-            var f = new Main();
-            this.Hide();
-            f.ShowDialog();
+          
 
         }
         private bool CheckIfAnyUsers()
         {
-            return _context.Users.Any();
+            return _userRepository.GetAll().Any();
         }
 
         private void Form1_Load(object sender, EventArgs e)
