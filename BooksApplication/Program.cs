@@ -19,6 +19,7 @@ namespace BooksApplication
             Services.AddSingleton<Form1>();
             Services.AddTransient<RegistrationForm>();
             Services.AddTransient<AddClient>();
+            Services.AddTransient<AddBook>();
             ServiceProvider = Services.BuildServiceProvider();
             var form = ServiceProvider.GetRequiredService<Form1>();
             Application.Run(form);

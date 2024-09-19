@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess;
 using BooksApplication.DataAccess.Entities;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BooksApplication
 {
@@ -26,16 +28,33 @@ namespace BooksApplication
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BT_Save_Click(object sender, EventArgs e)
         {
-            //kao register
+            string firstname = TB_Firstname.Text;
+            string lastname = TB_Lastname.Text;
+            string address = TB_Address.Text;
+            if (!int.TryParse(TB_Phone.Text, out int phone))
+            {
+                MessageBox.Show("Error: Phone number");
+                return;
+            }
+            //int phone = int.Parse(TB_Phone.Text);
+            if (string.IsNullOrEmpty(firstname) || string.IsNullOrEmpty(lastname) || string.IsNullOrEmpty(address))
+            {
+                MessageBox.Show("Missing fields");
+                return;
+            }
+
             var client = new Client();
-            client.FirstName = this.textBox1.Text; //...
-
-
-
+            client.FirstName = firstname;
+            client.LastName = lastname;
+            client.Address = address;
+            client.Phone = phone;
+; 
             _context.Clients.Add(client);
             _context.SaveChanges();
+            MessageBox.Show("Successful client processing");
+            this.Close();
         }
     }
 }

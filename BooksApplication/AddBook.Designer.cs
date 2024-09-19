@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
+            BT_Save = new Button();
+            BT_Exit = new Button();
             Naziv = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -42,23 +42,25 @@
             TB_Count = new TextBox();
             SuspendLayout();
             // 
-            // button1
+            // BT_Save
             // 
-            button1.Location = new Point(542, 415);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
+            BT_Save.Location = new Point(542, 415);
+            BT_Save.Name = "BT_Save";
+            BT_Save.Size = new Size(75, 23);
+            BT_Save.TabIndex = 0;
+            BT_Save.Text = "Save";
+            BT_Save.UseVisualStyleBackColor = true;
+            BT_Save.Click += BT_Save_Click;
             // 
-            // button2
+            // BT_Exit
             // 
-            button2.Location = new Point(146, 415);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Text = "Exit";
-            button2.UseVisualStyleBackColor = true;
+            BT_Exit.Location = new Point(146, 415);
+            BT_Exit.Name = "BT_Exit";
+            BT_Exit.Size = new Size(75, 23);
+            BT_Exit.TabIndex = 1;
+            BT_Exit.Text = "Exit";
+            BT_Exit.UseVisualStyleBackColor = true;
+            BT_Exit.Click += BT_Exit_Click;
             // 
             // Naziv
             // 
@@ -156,8 +158,8 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(Naziv);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(BT_Exit);
+            Controls.Add(BT_Save);
             Name = "AddBook";
             Text = "AddBook";
             ResumeLayout(false);
@@ -166,8 +168,8 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
+        private Button BT_Save;
+        private Button BT_Exit;
         private Label Naziv;
         private Label label2;
         private Label label3;

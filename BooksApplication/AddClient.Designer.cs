@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            BT_Save = new Button();
             button2 = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            TB_Firstname = new TextBox();
+            TB_Lastname = new TextBox();
+            TB_Address = new TextBox();
+            TB_Phone = new TextBox();
+            TB_Email = new TextBox();
             SuspendLayout();
             // 
-            // button1
+            // BT_Save
             // 
-            button1.Location = new Point(293, 313);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            BT_Save.Location = new Point(293, 313);
+            BT_Save.Name = "BT_Save";
+            BT_Save.Size = new Size(75, 23);
+            BT_Save.TabIndex = 0;
+            BT_Save.Text = "Save";
+            BT_Save.UseVisualStyleBackColor = true;
+            BT_Save.Click += BT_Save_Click;
             // 
             // button2
             // 
@@ -107,58 +107,58 @@
             label5.TabIndex = 6;
             label5.Text = "Email";
             // 
-            // textBox1
+            // TB_Firstname
             // 
-            textBox1.Location = new Point(202, 59);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(166, 23);
-            textBox1.TabIndex = 7;
+            TB_Firstname.Location = new Point(202, 59);
+            TB_Firstname.Name = "TB_Firstname";
+            TB_Firstname.Size = new Size(166, 23);
+            TB_Firstname.TabIndex = 7;
             // 
-            // textBox2
+            // TB_Lastname
             // 
-            textBox2.Location = new Point(202, 94);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(166, 23);
-            textBox2.TabIndex = 8;
+            TB_Lastname.Location = new Point(202, 94);
+            TB_Lastname.Name = "TB_Lastname";
+            TB_Lastname.Size = new Size(166, 23);
+            TB_Lastname.TabIndex = 8;
             // 
-            // textBox3
+            // TB_Address
             // 
-            textBox3.Location = new Point(202, 126);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(166, 23);
-            textBox3.TabIndex = 9;
+            TB_Address.Location = new Point(202, 126);
+            TB_Address.Name = "TB_Address";
+            TB_Address.Size = new Size(166, 23);
+            TB_Address.TabIndex = 9;
             // 
-            // textBox4
+            // TB_Phone
             // 
-            textBox4.Location = new Point(202, 162);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(166, 23);
-            textBox4.TabIndex = 10;
+            TB_Phone.Location = new Point(202, 162);
+            TB_Phone.Name = "TB_Phone";
+            TB_Phone.Size = new Size(166, 23);
+            TB_Phone.TabIndex = 10;
             // 
-            // textBox5
+            // TB_Email
             // 
-            textBox5.Location = new Point(202, 197);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(166, 23);
-            textBox5.TabIndex = 11;
+            TB_Email.Location = new Point(202, 197);
+            TB_Email.Name = "TB_Email";
+            TB_Email.Size = new Size(166, 23);
+            TB_Email.TabIndex = 11;
             // 
             // AddClient
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(503, 368);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(TB_Email);
+            Controls.Add(TB_Phone);
+            Controls.Add(TB_Address);
+            Controls.Add(TB_Lastname);
+            Controls.Add(TB_Firstname);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(BT_Save);
             Name = "AddClient";
             Text = "AddClient";
             ResumeLayout(false);
@@ -167,17 +167,17 @@
 
         #endregion
 
-        private Button button1;
+        private Button BT_Save;
         private Button button2;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox TB_Firstname;
+        private TextBox TB_Lastname;
+        private TextBox TB_Address;
+        private TextBox TB_Phone;
+        private TextBox TB_Email;
     }
 }

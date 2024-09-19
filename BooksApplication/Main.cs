@@ -16,5 +16,22 @@ namespace BooksApplication
         {
             InitializeComponent();
         }
+
+        private void BT_AddClient_Click(object sender, EventArgs e)
+        {
+            var form = Program.GetService<AddClient>();
+            form.ShowDialog();
+        }
+
+        private void BT_AddBook_Click(object sender, EventArgs e)
+        {
+            var form = Program.GetService<AddBook>();
+            form.ShowDialog();
+        }
+
+        private void BT_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
