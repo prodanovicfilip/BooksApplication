@@ -39,6 +39,8 @@ namespace BooksApplication
             Services.AddTransient<AddBook>();
 
             Services.AddSingleton<IUserRepository, UserRepository>(); // REpository Pattern
+            Services.AddSingleton<IClientRepository, ClientRepository>();
+            Services.AddSingleton<IBookRepository, BookRepository>();
         }
         public static void BuildServiceProvider(out Form1 form)
         {
