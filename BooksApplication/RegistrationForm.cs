@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess;
 using BooksApplication.DataAccess.Entities;
+using BooksApplication.Utilities;
 
 namespace BooksApplication
 {
@@ -25,6 +26,10 @@ namespace BooksApplication
         {
             var username = TB_Username.Text;
             var password = TB_Password.Text;
+            if(!Utils.IsValidString(username, password))
+            {
+                MessageBox.Show("Error");
+            }
             var user = new User();
             user.Username = username;
             user.Password = password;

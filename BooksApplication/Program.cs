@@ -27,25 +27,25 @@ namespace BooksApplication
             Application.Run(form);
             
         }
-        private static IServiceCollection Services { get; set; } = new ServiceCollection();
-        private static ServiceProvider ServiceProvider { get; set; }
+        private static IServiceCollection services { get; set; } = new ServiceCollection();
+        private static ServiceProvider serviceProvider { get; set; }
 
         public static void RegisterServices()
         {
-            Services.AddDbContext<BooksContext>();
-            Services.AddTransient<Form1>();
-            Services.AddTransient<RegistrationForm>();
-            Services.AddTransient<AddClient>();
-            Services.AddTransient<AddBook>();
+            services.AddDbContext<BooksContext>();
+            services.AddTransient<Form1>();
+            services.AddTransient<RegistrationForm>();
+            services.AddTransient<AddClient>();
+            services.AddTransient<AddBook>();
 
-            Services.AddSingleton<IUserRepository, UserRepository>(); // REpository Pattern
-            Services.AddSingleton<IClientRepository, ClientRepository>();
-            Services.AddSingleton<IBookRepository, BookRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>(); // REpository Pattern
+            services.AddSingleton<IClientRepository, ClientRepository>();
+            services.AddSingleton<IBookRepository, BookRepository>();
         }
         public static void BuildServiceProvider(out Form1 form)
         {
-            ServiceProvider = Services.BuildServiceProvider();
-            form = ServiceProvider.GetRequiredService<Form1>();
+            serviceProvider = services.BuildServiceProvider();
+            form = serviceProvider.GetRequiredService<Form1>();
         }
         ///
         /// Get Service 
@@ -53,7 +53,7 @@ namespace BooksApplication
         /// T -> Tip <Genericki></Genericki>
         public static T GetService<T>()
         {
-            return (T)ServiceProvider.GetRequiredService<T>();
+            return (T)serviceProvider.GetRequiredService<T>();
         }
     }
 }

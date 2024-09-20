@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess;
 using BooksApplication.DataAccess.Entities;
+using BooksApplication.Utilities;
 
 namespace BooksApplication
 {
@@ -40,7 +41,8 @@ namespace BooksApplication
                 return;
             }
             
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(year) || string.IsNullOrEmpty(description))
+            //if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(year) || string.IsNullOrEmpty(description))
+            if(!Utils.IsValidString(title,author,year,description))
             {
                 MessageBox.Show("Missing fields");
                 return;

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess;
 using BooksApplication.DataAccess.Entities;
+using BooksApplication.Utilities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BooksApplication
@@ -38,8 +39,8 @@ namespace BooksApplication
                 MessageBox.Show("Error: Phone number");
                 return;
             }
-            //int phone = int.Parse(TB_Phone.Text);
-            if (string.IsNullOrEmpty(firstname) || string.IsNullOrEmpty(lastname) || string.IsNullOrEmpty(address))
+            //if (string.IsNullOrEmpty(firstname) || string.IsNullOrEmpty(lastname) || string.IsNullOrEmpty(address))
+            if(!Utils.IsValidString(firstname,lastname,address))
             {
                 MessageBox.Show("Missing fields");
                 return;

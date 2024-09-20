@@ -1,6 +1,7 @@
 using BooksApplication.BLL.Models;
 using BooksApplication.DataAccess;
 using BooksApplication.DataAccess.Infrastructure;
+using BooksApplication.Utilities;
 using Mapster;
 
 namespace BooksApplication
@@ -20,7 +21,7 @@ namespace BooksApplication
             string username = TB_Username.Text;
             string password = TB_Password.Text;
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (!Utils.IsValidString(username,password))
             {
                 MessageBox.Show("Error!");
                 return;
