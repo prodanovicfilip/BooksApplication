@@ -73,6 +73,7 @@
             GV_Books.AllowUserToDeleteRows = false;
             GV_Books.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             GV_Books.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GV_Books.ContextMenuStrip = CT_Context;
             GV_Books.Location = new Point(-1, 35);
             GV_Books.Name = "GV_Books";
             GV_Books.ReadOnly = true;

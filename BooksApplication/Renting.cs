@@ -77,6 +77,10 @@ namespace BooksApplication
             {
                 case MouseButtons.Right:
                     {
+                        var hit = GV_Books.HitTest(e.X, e.Y);
+                        GV_Books.ClearSelection();
+                        GV_Books.Rows[hit.RowIndex].Selected = true;
+                        _selectedBook = _books.ToList()[hit.RowIndex];
                         CT_Context.Show(this, new Point(e.X, e.Y));
                     }
                     break;
