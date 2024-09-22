@@ -29,9 +29,9 @@ namespace BooksApplication
             form.ShowDialog();
         }
 
-        private void BT_Exit_Click(object sender, EventArgs e)
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
 
         private void BT_Renting_Click(object sender, EventArgs e)

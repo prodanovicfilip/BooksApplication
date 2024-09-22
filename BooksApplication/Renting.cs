@@ -55,6 +55,8 @@ namespace BooksApplication
         private void TS_Delete_Click(object sender, EventArgs e)
         {
 
+            _bookRepository.Delete(_selectedBook.Id);
+            RentingRefresh();
         }
 
         private void TS_Edit_Click(object sender, EventArgs e)
@@ -63,7 +65,7 @@ namespace BooksApplication
             form.SetBook(_selectedBook);
             form.ShowDialog();
         }
-
+   
         private void GV_Books_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             _selectedBook = _books.ToList()[e.RowIndex];
@@ -84,6 +86,11 @@ namespace BooksApplication
         private void GV_Books_SelectionChanged(object sender, EventArgs e)
         {
             
+        }
+        private void RentingRefresh()
+        {
+            _books = _bookRepository.GetAll().ToList();
+            GV_Books.DataSource = _books;
         }
     }
 }

@@ -31,7 +31,6 @@
             BT_AddClient = new Button();
             BT_AddBook = new Button();
             BT_Renting = new Button();
-            BT_Exit = new Button();
             SuspendLayout();
             // 
             // BT_AddClient
@@ -64,27 +63,17 @@
             BT_Renting.UseVisualStyleBackColor = true;
             BT_Renting.Click += BT_Renting_Click;
             // 
-            // BT_Exit
-            // 
-            BT_Exit.Location = new Point(161, 221);
-            BT_Exit.Name = "BT_Exit";
-            BT_Exit.Size = new Size(104, 41);
-            BT_Exit.TabIndex = 4;
-            BT_Exit.Text = "Exit";
-            BT_Exit.UseVisualStyleBackColor = true;
-            BT_Exit.Click += BT_Exit_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(438, 274);
-            Controls.Add(BT_Exit);
             Controls.Add(BT_Renting);
             Controls.Add(BT_AddClient);
             Controls.Add(BT_AddBook);
             Name = "Main";
             Text = "Main";
+            FormClosed += Main_FormClosed;
             ResumeLayout(false);
         }
 
@@ -92,6 +81,5 @@
         private Button BT_AddBook;
         private Button BT_AddClient;
         private Button BT_Renting;
-        private Button BT_Exit;
     }
 }

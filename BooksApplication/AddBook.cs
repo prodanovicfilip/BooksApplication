@@ -71,6 +71,7 @@ namespace BooksApplication
             TB_Author.Text = _selectedBook.Author;
             TB_Year.Text = _selectedBook.Year;
             TB_Desc.Text = _selectedBook.Description;
+            TB_Count.Text = _selectedBook.Count.ToString();
         }
     }
 }
