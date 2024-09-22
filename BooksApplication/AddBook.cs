@@ -58,7 +58,10 @@ namespace BooksApplication
             _selectedBook.Description = description;
             _selectedBook.Count = count;
 
-            _context.Books.Add(_selectedBook);
+            if (_context.Books.Find(_selectedBook.Id) == _selectedBook) 
+                _context.Books.Update(_selectedBook);
+            else 
+                _context.Books.Add(_selectedBook);
             _context.SaveChanges();
             MessageBox.Show("Added book");
             this.Close();
