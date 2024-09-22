@@ -62,6 +62,7 @@
             BT_Renting.TabIndex = 3;
             BT_Renting.Text = "Renting";
             BT_Renting.UseVisualStyleBackColor = true;
+            BT_Renting.Click += BT_Renting_Click;
             // 
             // BT_Exit
             // 

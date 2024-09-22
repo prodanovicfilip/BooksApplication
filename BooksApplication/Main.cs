@@ -33,5 +33,11 @@ namespace BooksApplication
         {
             this.Close();
         }
+
+        private void BT_Renting_Click(object sender, EventArgs e)
+        {
+            var form = Program.GetService<Renting>();
+            form.ShowDialog();
+        }
     }
 }
