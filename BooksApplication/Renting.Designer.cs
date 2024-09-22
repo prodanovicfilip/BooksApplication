@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             TB_Search = new TextBox();
             BT_Search = new Button();
             GV_Books = new DataGridView();
+            CT_Context = new ContextMenuStrip(components);
+            TS_Rent = new ToolStripMenuItem();
+            TS_Delete = new ToolStripMenuItem();
+            TS_Edit = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)GV_Books).BeginInit();
+            CT_Context.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -72,6 +78,36 @@
             GV_Books.ReadOnly = true;
             GV_Books.Size = new Size(928, 462);
             GV_Books.TabIndex = 3;
+            GV_Books.CellClick += GV_Books_CellClick;
+            GV_Books.SelectionChanged += GV_Books_SelectionChanged;
+            GV_Books.MouseDown += GV_Books_MouseDown;
+            // 
+            // CT_Context
+            // 
+            CT_Context.Items.AddRange(new ToolStripItem[] { TS_Rent, TS_Delete, TS_Edit });
+            CT_Context.Name = "CT_Context";
+            CT_Context.Size = new Size(108, 70);
+            // 
+            // TS_Rent
+            // 
+            TS_Rent.Name = "TS_Rent";
+            TS_Rent.Size = new Size(107, 22);
+            TS_Rent.Text = "Rent";
+            TS_Rent.Click += TS_Rent_Click;
+            // 
+            // TS_Delete
+            // 
+            TS_Delete.Name = "TS_Delete";
+            TS_Delete.Size = new Size(107, 22);
+            TS_Delete.Text = "Delete";
+            TS_Delete.Click += TS_Delete_Click;
+            // 
+            // TS_Edit
+            // 
+            TS_Edit.Name = "TS_Edit";
+            TS_Edit.Size = new Size(107, 22);
+            TS_Edit.Text = "Edit";
+            TS_Edit.Click += TS_Edit_Click;
             // 
             // Renting
             // 
@@ -86,6 +122,7 @@
             Text = "Renting";
             Load += Renting_Load;
             ((System.ComponentModel.ISupportInitialize)GV_Books).EndInit();
+            CT_Context.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,5 +133,9 @@
         private TextBox TB_Search;
         private Button BT_Search;
         private DataGridView GV_Books;
+        private ContextMenuStrip CT_Context;
+        private ToolStripMenuItem TS_Rent;
+        private ToolStripMenuItem TS_Delete;
+        private ToolStripMenuItem TS_Edit;
     }
 }

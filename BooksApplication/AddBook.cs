@@ -18,6 +18,7 @@ namespace BooksApplication
     public partial class AddBook : Form
     {
         private readonly BooksContext _context;
+        private Book _selectedBook;
         public AddBook(BooksContext context)
         {
             InitializeComponent();
@@ -47,18 +48,29 @@ namespace BooksApplication
                 MessageBox.Show("Missing fields");
                 return;
             }
+            if (_selectedBook == null)
+            {
+                _selectedBook = new Book();
+            }
+            _selectedBook.Title = title;
+            _selectedBook.Author = author;
+            _selectedBook.Year = year;
+            _selectedBook.Description = description;
+            _selectedBook.Count = count;
 
-            var book = new Book();
-            book.Title = title;
-            book.Author = author;
-            book.Year = year;
-            book.Description = description;
-            book.Count = count;
-
-            _context.Books.Add(book);
+            _context.Books.Add(_selectedBook);
             _context.SaveChanges();
             MessageBox.Show("Added book");
             this.Close();
+        }
+
+        public void SetBook(Book book)
+        {
+            _selectedBook = book;
+            TB_Title.Text = _selectedBook.Title;
+            TB_Author.Text = _selectedBook.Author;
+            TB_Year.Text = _selectedBook.Year;
+            TB_Desc.Text = _selectedBook.Description;
         }
     }
 }
