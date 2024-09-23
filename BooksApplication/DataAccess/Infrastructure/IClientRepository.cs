@@ -13,7 +13,7 @@ namespace BooksApplication.DataAccess.Infrastructure
         public IEnumerable<Client> GetAll();
         public Client GetById(int id);
         public Client Update(int id, Client client);
-
         public void Delete(int id);
+        public void SaveChanges();
     }
 }

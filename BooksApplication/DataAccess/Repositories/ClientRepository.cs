@@ -55,5 +55,9 @@ namespace BooksApplication.DataAccess.Repositories
             _context.SaveChanges();
             return entity;
         }
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }

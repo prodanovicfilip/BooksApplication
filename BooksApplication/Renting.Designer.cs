@@ -37,6 +37,11 @@
             TS_Rent = new ToolStripMenuItem();
             TS_Delete = new ToolStripMenuItem();
             TS_Edit = new ToolStripMenuItem();
+            label2 = new Label();
+            LB_BooksCount = new Label();
+            BT_SaveClient = new Button();
+            label3 = new Label();
+            LB_Client = new Label();
             ((System.ComponentModel.ISupportInitialize)GV_Books).BeginInit();
             CT_Context.SuspendLayout();
             SuspendLayout();
@@ -74,10 +79,11 @@
             GV_Books.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             GV_Books.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             GV_Books.ContextMenuStrip = CT_Context;
-            GV_Books.Location = new Point(-1, 35);
+            GV_Books.Location = new Point(-1, 73);
             GV_Books.Name = "GV_Books";
             GV_Books.ReadOnly = true;
-            GV_Books.Size = new Size(928, 462);
+            GV_Books.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            GV_Books.Size = new Size(928, 424);
             GV_Books.TabIndex = 3;
             GV_Books.CellClick += GV_Books_CellClick;
             GV_Books.SelectionChanged += GV_Books_SelectionChanged;
@@ -110,11 +116,62 @@
             TS_Edit.Text = "Edit";
             TS_Edit.Click += TS_Edit_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(456, 10);
+            label2.Name = "label2";
+            label2.Size = new Size(78, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Books Count:";
+            // 
+            // LB_BooksCount
+            // 
+            LB_BooksCount.AutoSize = true;
+            LB_BooksCount.Location = new Point(540, 9);
+            LB_BooksCount.Name = "LB_BooksCount";
+            LB_BooksCount.Size = new Size(27, 15);
+            LB_BooksCount.TabIndex = 5;
+            LB_BooksCount.Text = "null";
+            // 
+            // BT_SaveClient
+            // 
+            BT_SaveClient.Location = new Point(839, 12);
+            BT_SaveClient.Name = "BT_SaveClient";
+            BT_SaveClient.Size = new Size(75, 23);
+            BT_SaveClient.TabIndex = 6;
+            BT_SaveClient.Text = "Save";
+            BT_SaveClient.UseVisualStyleBackColor = true;
+            BT_SaveClient.Click += BT_SaveClient_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(456, 34);
+            label3.Name = "label3";
+            label3.Size = new Size(41, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Client:";
+            // 
+            // LB_Client
+            // 
+            LB_Client.AutoSize = true;
+            LB_Client.Location = new Point(540, 34);
+            LB_Client.Name = "LB_Client";
+            LB_Client.Size = new Size(27, 15);
+            LB_Client.TabIndex = 8;
+            LB_Client.Text = "null";
+            // 
             // Renting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(926, 498);
+            Controls.Add(LB_Client);
+            Controls.Add(label3);
+            Controls.Add(BT_SaveClient);
+            Controls.Add(LB_BooksCount);
+            Controls.Add(label2);
             Controls.Add(GV_Books);
             Controls.Add(BT_Search);
             Controls.Add(TB_Search);
@@ -138,5 +195,10 @@
         private ToolStripMenuItem TS_Rent;
         private ToolStripMenuItem TS_Delete;
         private ToolStripMenuItem TS_Edit;
+        private Label label2;
+        private Label LB_BooksCount;
+        private Button BT_SaveClient;
+        private Label label3;
+        private Label LB_Client;
     }
 }

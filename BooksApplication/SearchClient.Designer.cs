@@ -31,6 +31,7 @@
             DG_Clients = new DataGridView();
             TB_Search = new TextBox();
             BT_Search = new Button();
+            BT_Select = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_Clients).BeginInit();
             SuspendLayout();
             // 
@@ -40,8 +41,10 @@
             DG_Clients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_Clients.Location = new Point(0, 46);
             DG_Clients.Name = "DG_Clients";
+            DG_Clients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DG_Clients.Size = new Size(720, 343);
             DG_Clients.TabIndex = 0;
+            DG_Clients.SelectionChanged += DG_Clients_SelectionChanged;
             // 
             // TB_Search
             // 
@@ -60,11 +63,23 @@
             BT_Search.UseVisualStyleBackColor = true;
             BT_Search.Click += BT_Search_Click;
             // 
+            // BT_Select
+            // 
+            BT_Select.Location = new Point(337, 16);
+            BT_Select.Name = "BT_Select";
+            BT_Select.Size = new Size(75, 23);
+            BT_Select.TabIndex = 3;
+            BT_Select.Text = "Select";
+            BT_Select.UseVisualStyleBackColor = true;
+            BT_Select.Visible = false;
+            BT_Select.Click += BT_Select_Click;
+            // 
             // SearchClient
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 387);
+            Controls.Add(BT_Select);
             Controls.Add(BT_Search);
             Controls.Add(TB_Search);
             Controls.Add(DG_Clients);
@@ -81,5 +96,6 @@
         private DataGridView DG_Clients;
         private TextBox TB_Search;
         private Button BT_Search;
+        private Button BT_Select;
     }
 }

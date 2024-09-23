@@ -29,7 +29,7 @@ namespace BooksApplication
     InitializeBooksDb();
 #endif
 #if ClientInitialization
-    InitializeBooksDb();
+    InitializeClientsDb();
 #endif
 
             // out keyword stavlja vrednost u form variablu
@@ -69,6 +69,7 @@ namespace BooksApplication
             services.AddTransient<AddClient>();
             services.AddTransient<AddBook>();
             services.AddTransient<Renting>();
+            services.AddTransient<SearchClient>();
 
             services.AddSingleton<IUserRepository, UserRepository>(); // REpository Pattern
             services.AddSingleton<IClientRepository, ClientRepository>();

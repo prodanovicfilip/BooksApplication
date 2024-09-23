@@ -19,11 +19,13 @@ namespace BooksApplication
         private readonly IBookRepository _bookRepository;
         private IEnumerable<Book> _books;
         private Book _selectedBook;
+        private Client _selectedClient;
         public Renting(IClientRepository clientRepository, IBookRepository bookRepository)
         {
             InitializeComponent();
             _clientRepository = clientRepository;
             _bookRepository = bookRepository;
+            LB_Client.Text = "Please select client";
         }
 
         private void Renting_Load(object sender, EventArgs e)
@@ -35,6 +37,7 @@ namespace BooksApplication
                 return;
             }
             GV_Books.DataSource = _books;
+            LB_BooksCount.Text = "0";
         }
 
         private void BT_Search_Click(object sender, EventArgs e)
@@ -49,7 +52,30 @@ namespace BooksApplication
 
         private void TS_Rent_Click(object sender, EventArgs e)
         {
-
+            if (_selectedClient == null)
+            {
+                var form = Program.GetService<SearchClient>();
+                form.EditForm();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    _selectedClient = (Client)form.Tag;
+                    LB_Client.Text = _selectedClient.FirstName + " " + _selectedClient.LastName;
+                    if (_selectedClient.Books == null)
+                    {
+                        _selectedClient.Books = new List<Book>();
+                    }
+                    _selectedClient.Books.Add(_selectedBook);
+                }
+            }
+            else
+            {
+                if (_selectedClient.Books == null)
+                {
+                    _selectedClient.Books = new List<Book>();
+                }
+                _selectedClient.Books.Add(_selectedBook);
+            }
+            LB_BooksCount.Text = _selectedClient.Books.Count.ToString();
         }
 
         private void TS_Delete_Click(object sender, EventArgs e)
@@ -64,8 +90,9 @@ namespace BooksApplication
             var form = Program.GetService<AddBook>();
             form.SetBook(_selectedBook);
             form.ShowDialog();
+            RentingRefresh();
         }
-   
+
         private void GV_Books_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             _selectedBook = _books.ToList()[e.RowIndex];
@@ -89,12 +116,22 @@ namespace BooksApplication
 
         private void GV_Books_SelectionChanged(object sender, EventArgs e)
         {
-            
+
         }
         private void RentingRefresh()
         {
             _books = _bookRepository.GetAll().ToList();
             GV_Books.DataSource = _books;
+        }
+
+        private void BT_SaveClient_Click(object sender, EventArgs e)
+        {
+            if (_selectedClient == null)
+            {
+                MessageBox.Show("Please select a client");
+                return;
+            }
+            _clientRepository.SaveChanges();
         }
     }
 }
