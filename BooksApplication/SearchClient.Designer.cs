@@ -28,23 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DG_Clients = new DataGridView();
+            CT_Context = new ContextMenuStrip(components);
+            TS_SeeBooks = new ToolStripMenuItem();
             TB_Search = new TextBox();
             BT_Search = new Button();
             BT_Select = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_Clients).BeginInit();
+            CT_Context.SuspendLayout();
             SuspendLayout();
             // 
             // DG_Clients
             // 
             DG_Clients.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DG_Clients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DG_Clients.ContextMenuStrip = CT_Context;
             DG_Clients.Location = new Point(0, 46);
             DG_Clients.Name = "DG_Clients";
             DG_Clients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DG_Clients.Size = new Size(720, 343);
             DG_Clients.TabIndex = 0;
             DG_Clients.SelectionChanged += DG_Clients_SelectionChanged;
+            DG_Clients.MouseDown += DG_Clients_MouseDown;
+            // 
+            // CT_Context
+            // 
+            CT_Context.Items.AddRange(new ToolStripItem[] { TS_SeeBooks });
+            CT_Context.Name = "CT_Context";
+            CT_Context.Size = new Size(181, 48);
+            // 
+            // TS_SeeBooks
+            // 
+            TS_SeeBooks.Name = "TS_SeeBooks";
+            TS_SeeBooks.Size = new Size(180, 22);
+            TS_SeeBooks.Text = "See Rented Books";
+            TS_SeeBooks.Click += TS_SeeBooks_Click;
             // 
             // TB_Search
             // 
@@ -87,6 +106,7 @@
             Text = "SearchClient";
             Load += SearchClient_Load;
             ((System.ComponentModel.ISupportInitialize)DG_Clients).EndInit();
+            CT_Context.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -97,5 +117,7 @@
         private TextBox TB_Search;
         private Button BT_Search;
         private Button BT_Select;
+        private ContextMenuStrip CT_Context;
+        private ToolStripMenuItem TS_SeeBooks;
     }
 }

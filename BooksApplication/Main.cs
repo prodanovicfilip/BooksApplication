@@ -39,5 +39,11 @@ namespace BooksApplication
             var form = Program.GetService<Renting>();
             form.ShowDialog();
         }
+
+        private void BT_SearchClient_Click(object sender, EventArgs e)
+        {
+            var form = Program.GetService<SearchClient>();
+            form.ShowDialog();
+        }
     }
 }

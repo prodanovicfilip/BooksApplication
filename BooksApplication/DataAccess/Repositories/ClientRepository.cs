@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksApplication.DataAccess.Repositories
 {
@@ -34,13 +35,13 @@ namespace BooksApplication.DataAccess.Repositories
 
         public IEnumerable<Client> GetAll()
         {
-            return _context.Clients.ToList();
+            return _context.Clients.Include(x => x.Books).ToList();
         }
 
         public Client GetById(int id)
         {
             if (id <= 0) throw new ArgumentOutOfRangeException("id");
-            var client = _context.Clients.FirstOrDefault(c => c.Id == id);
+            var client = _context.Clients.Include(x => x.Books).FirstOrDefault(c => c.Id == id);
             if (client == null) throw new Exception();
             return client;
         }

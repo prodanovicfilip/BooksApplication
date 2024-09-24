@@ -74,5 +74,28 @@ namespace BooksApplication
             catch (Exception ex) { }
 
         }
+
+        private void DG_Clients_MouseDown(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Right:
+                    {
+                        var hit = DG_Clients.HitTest(e.X, e.Y);
+                        DG_Clients.ClearSelection();
+                        DG_Clients.Rows[hit.RowIndex].Selected = true;
+                        _selectedClient = _clients.ToList()[hit.RowIndex];
+                        CT_Context.Show(this, new Point(e.X, e.Y));
+                    }
+                    break;
+            }
+        }
+
+        private void TS_SeeBooks_Click(object sender, EventArgs e)
+        {
+            var form = Program.GetService<Renting>();
+            form.SetClient(_selectedClient);
+            form.ShowDialog();
+        }
     }
 }

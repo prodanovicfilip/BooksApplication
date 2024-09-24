@@ -15,19 +15,45 @@ namespace BooksApplication
 {
     public partial class Renting : Form
     {
+        private enum FormState
+        {
+            Normal,
+            Client
+        }
         private readonly IClientRepository _clientRepository;
         private readonly IBookRepository _bookRepository;
         private IEnumerable<Book> _books;
         private Book _selectedBook;
         private Client _selectedClient;
+        private bool _isDirty;
+        private FormState _formState = FormState.Normal;
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set 
+            { 
+                _isDirty = value;
+                BT_SaveClient.Enabled = value;
+            }
+        }
+
         public Renting(IClientRepository clientRepository, IBookRepository bookRepository)
         {
             InitializeComponent();
             _clientRepository = clientRepository;
             _bookRepository = bookRepository;
             LB_Client.Text = "Please select client";
+            IsDirty = false;
         }
-
+        public void SetClient(Client client)
+        {
+            if (client == null) return;
+            _selectedClient = client;
+            LB_Client.Text = _selectedClient.FirstName + " " + _selectedClient.LastName;
+            LB_BooksCount.Text = _selectedClient.Books.Count.ToString();
+            BT_SaveClient.Visible = false;
+            _formState = FormState.Client;
+        }
         private void Renting_Load(object sender, EventArgs e)
         {
             _books = _bookRepository.GetAll().ToList();
@@ -36,18 +62,34 @@ namespace BooksApplication
                 MessageBox.Show("There are no books available");
                 return;
             }
-            GV_Books.DataSource = _books;
-            LB_BooksCount.Text = "0";
+            if (_selectedClient == null)
+                GV_Books.DataSource = _books;
+            else
+            {
+                GV_Books.DataSource = _selectedClient.Books.ToList();
+            }  
         }
 
         private void BT_Search_Click(object sender, EventArgs e)
         {
-            if (!Utils.IsValidString(BT_Search.Text))
+            if (_formState == FormState.Client)
             {
-                GV_Books.DataSource = _books;
-                return;
+                if (!Utils.IsValidString(BT_Search.Text))
+                {
+                    GV_Books.DataSource = _selectedClient.Books.ToList();
+                    return;
+                }
+                GV_Books.DataSource = _selectedClient.Books.Where(b => b.Title.Contains(TB_Search.Text) || b.Author.Contains(TB_Search.Text)).ToList();
             }
-            GV_Books.DataSource = _books.Where(b => b.Title.Contains(TB_Search.Text) || b.Author.Contains(TB_Search.Text)).ToList();
+            else
+            {
+                if (!Utils.IsValidString(BT_Search.Text))
+                {
+                    GV_Books.DataSource = _books;
+                    return;
+                }
+                GV_Books.DataSource = _books.Where(b => b.Title.Contains(TB_Search.Text) || b.Author.Contains(TB_Search.Text)).ToList();
+            }
         }
 
         private void TS_Rent_Click(object sender, EventArgs e)
@@ -65,6 +107,7 @@ namespace BooksApplication
                         _selectedClient.Books = new List<Book>();
                     }
                     _selectedClient.Books.Add(_selectedBook);
+                    IsDirty = true;
                 }
             }
             else
@@ -74,8 +117,10 @@ namespace BooksApplication
                     _selectedClient.Books = new List<Book>();
                 }
                 _selectedClient.Books.Add(_selectedBook);
+                IsDirty = true;
             }
-            LB_BooksCount.Text = _selectedClient.Books.Count.ToString();
+            if (_selectedClient != null)
+                LB_BooksCount.Text = _selectedClient.Books.Count.ToString();
         }
 
         private void TS_Delete_Click(object sender, EventArgs e)
@@ -113,11 +158,6 @@ namespace BooksApplication
                     break;
             }
         }
-
-        private void GV_Books_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
         private void RentingRefresh()
         {
             _books = _bookRepository.GetAll().ToList();
@@ -131,7 +171,12 @@ namespace BooksApplication
                 MessageBox.Show("Please select a client");
                 return;
             }
-            _clientRepository.SaveChanges();
+            if (_isDirty)
+            {
+                _clientRepository.SaveChanges();
+                IsDirty = false;
+            }
+
         }
     }
 }
