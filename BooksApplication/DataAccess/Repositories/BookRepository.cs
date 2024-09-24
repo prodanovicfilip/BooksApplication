@@ -21,6 +21,12 @@ namespace BooksApplication.DataAccess.Repositories
             // SaveChanges
         }
 
+        public int Add(IEnumerable<Book> books)
+        {
+            _context.Books.AddRange(books);
+            return _context.SaveChanges();
+        }
+
         public bool Delete(int id)
         {
             if (id <= 0) throw new ArgumentOutOfRangeException();

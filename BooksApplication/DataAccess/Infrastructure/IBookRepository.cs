@@ -6,6 +6,7 @@ namespace BooksApplication.DataAccess.Infrastructure
     public interface IBookRepository
     {
         public int Add(Book book);
+        public int Add(IEnumerable<Book> books);
         public IEnumerable<Book> GetAll();
         public Book GetById(int id);
         public Book Update(int id, Book book);

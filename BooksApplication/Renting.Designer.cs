@@ -42,6 +42,8 @@
             BT_SaveClient = new Button();
             label3 = new Label();
             LB_Client = new Label();
+            BT_Export = new Button();
+            BT_Import = new Button();
             ((System.ComponentModel.ISupportInitialize)GV_Books).BeginInit();
             CT_Context.SuspendLayout();
             SuspendLayout();
@@ -161,11 +163,33 @@
             LB_Client.TabIndex = 8;
             LB_Client.Text = "null";
             // 
+            // BT_Export
+            // 
+            BT_Export.Location = new Point(12, 34);
+            BT_Export.Name = "BT_Export";
+            BT_Export.Size = new Size(75, 23);
+            BT_Export.TabIndex = 9;
+            BT_Export.Text = "Export";
+            BT_Export.UseVisualStyleBackColor = true;
+            BT_Export.Click += BT_Export_Click;
+            // 
+            // BT_Import
+            // 
+            BT_Import.Location = new Point(93, 35);
+            BT_Import.Name = "BT_Import";
+            BT_Import.Size = new Size(75, 23);
+            BT_Import.TabIndex = 10;
+            BT_Import.Text = "Import";
+            BT_Import.UseVisualStyleBackColor = true;
+            BT_Import.Click += BT_Import_Click;
+            // 
             // Renting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(926, 498);
+            Controls.Add(BT_Import);
+            Controls.Add(BT_Export);
             Controls.Add(LB_Client);
             Controls.Add(label3);
             Controls.Add(BT_SaveClient);
@@ -199,5 +223,7 @@
         private Button BT_SaveClient;
         private Label label3;
         private Label LB_Client;
+        private Button BT_Export;
+        private Button BT_Import;
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
+using BooksApplication.Services;
 using BooksApplication.Utilities;
 
 namespace BooksApplication
@@ -30,8 +31,8 @@ namespace BooksApplication
         public bool IsDirty
         {
             get { return _isDirty; }
-            set 
-            { 
+            set
+            {
                 _isDirty = value;
                 BT_SaveClient.Enabled = value;
             }
@@ -63,11 +64,13 @@ namespace BooksApplication
                 return;
             }
             if (_selectedClient == null)
+            {
                 GV_Books.DataSource = _books;
+            }
             else
             {
                 GV_Books.DataSource = _selectedClient.Books.ToList();
-            }  
+            }
         }
 
         private void BT_Search_Click(object sender, EventArgs e)
@@ -177,6 +180,42 @@ namespace BooksApplication
                 IsDirty = false;
             }
 
+        }
+
+        private void BT_Export_Click(object sender, EventArgs e)
+        {
+            var fileDialog = new SaveFileDialog();
+            var exportService = Program.GetService<IExportService>();
+            DialogResult dialogResult = fileDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                exportService.ExportJson(_books, fileDialog.FileName);
+            }
+        }
+
+        private void BT_Import_Click(object sender, EventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            var exportService = Program.GetService<IExportService>();
+            DialogResult dialogResult = fileDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK) 
+            { 
+                var newBooks = exportService.ImportFromJson<Book>(fileDialog.FileName);
+                if (newBooks != null)
+                {
+                    ResetId(newBooks);
+                    _bookRepository.Add(newBooks);
+                    _books = _bookRepository.GetAll().ToList();
+                }
+            }
+        }
+
+        private static void ResetId(IEnumerable<Book> newBooks)
+        {
+            foreach (var book in newBooks)
+            {
+                book.Id = 0;
+            }
         }
     }
 }
