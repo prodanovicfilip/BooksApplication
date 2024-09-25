@@ -141,11 +141,6 @@ namespace BooksApplication
             RentingRefresh();
         }
 
-        private void GV_Books_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            _selectedBook = _books.ToList()[e.RowIndex];
-        }
-
         private void GV_Books_MouseDown(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -184,13 +179,30 @@ namespace BooksApplication
 
         private void BT_Export_Click(object sender, EventArgs e)
         {
-            var fileDialog = new SaveFileDialog();
-            var exportService = Program.GetService<IExportService>();
-            DialogResult dialogResult = fileDialog.ShowDialog();
-            if (dialogResult == DialogResult.OK)
+            var dialog = Program.GetService<ExportDialog>();
+            dialog.ShowDialog();
+            if (dialog == null || dialog.State == ExportDialog.States.None) return;
+            if (dialog.State == ExportDialog.States.Json)
             {
-                exportService.ExportJson(_books, fileDialog.FileName);
+                var fileDialog = new SaveFileDialog();
+                var exportService = Program.GetService<IExportService>();
+                DialogResult dialogResult = fileDialog.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    exportService.ExportJson(_books, fileDialog.FileName);
+                }
             }
+            if (dialog.State == ExportDialog.States.Text)
+            {
+                var fileDialog = new SaveFileDialog();
+                var exportService = Program.GetService<IExportService>();
+                DialogResult dialogResult = fileDialog.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    exportService.ExportTxt(_books, fileDialog.FileName);
+                }
+            }
+            
         }
 
         private void BT_Import_Click(object sender, EventArgs e)

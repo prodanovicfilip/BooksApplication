@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
+using BooksApplication.DataAccess.Repositories;
+using BooksApplication.Services;
 using BooksApplication.Utilities;
 
 namespace BooksApplication
@@ -96,6 +98,57 @@ namespace BooksApplication
             var form = Program.GetService<Renting>();
             form.SetClient(_selectedClient);
             form.ShowDialog();
+        }
+
+        private void BT_Export_Click(object sender, EventArgs e)
+        {
+            var dialog = Program.GetService<ExportDialog>();
+            dialog.ShowDialog();
+            if (dialog == null || dialog.State == ExportDialog.States.None) return;
+            if (dialog.State == ExportDialog.States.Json)
+            {
+                var fileDialog = new SaveFileDialog();
+                var exportService = Program.GetService<IExportService>();
+                DialogResult dialogResult = fileDialog.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    exportService.ExportJson(_clients, fileDialog.FileName); // error!
+                }
+            }
+            if (dialog.State == ExportDialog.States.Text)
+            {
+                var fileDialog = new SaveFileDialog();
+                var exportService = Program.GetService<IExportService>();
+                DialogResult dialogResult = fileDialog.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    exportService.ExportTxt(_clients, fileDialog.FileName);
+                }
+            }
+        }
+
+        private void BT_Import_Click(object sender, EventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            var exportService = Program.GetService<IExportService>();
+            DialogResult dialogResult = fileDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                var newClients = exportService.ImportFromJson<Client>(fileDialog.FileName);
+                if (newClients != null)
+                {
+                    ResetId(newClients);
+                    _clientRepository.Add(newClients);
+                    _clients = _clientRepository.GetAll().ToList();
+                }
+            }
+        }
+        private static void ResetId(IEnumerable<Client> newClients)
+        {
+            foreach (var client in newClients)
+            {
+                client.Id = 0;
+            }
         }
     }
 }

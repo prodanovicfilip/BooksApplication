@@ -87,7 +87,6 @@
             GV_Books.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GV_Books.Size = new Size(928, 424);
             GV_Books.TabIndex = 3;
-            GV_Books.CellClick += GV_Books_CellClick;
             GV_Books.MouseDown += GV_Books_MouseDown;
             // 
             // CT_Context

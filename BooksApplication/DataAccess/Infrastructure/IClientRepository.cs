@@ -10,6 +10,7 @@ namespace BooksApplication.DataAccess.Infrastructure
     public interface IClientRepository
     {
         public int Add(Client client);
+        public int Add(IEnumerable<Client> clients);
         public IEnumerable<Client> GetAll();
         public Client GetById(int id);
         public Client Update(int id, Client client);

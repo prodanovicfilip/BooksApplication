@@ -5,5 +5,6 @@ namespace BooksApplication.Services
     {
         void ExportJson(IEnumerable<object> list, string path);
         IEnumerable<T> ImportFromJson<T>(string path);
+        void ExportTxt(IEnumerable<object> list, string path);
     }
 }

@@ -35,6 +35,8 @@
             TB_Search = new TextBox();
             BT_Search = new Button();
             BT_Select = new Button();
+            BT_Import = new Button();
+            BT_Export = new Button();
             ((System.ComponentModel.ISupportInitialize)DG_Clients).BeginInit();
             CT_Context.SuspendLayout();
             SuspendLayout();
@@ -44,10 +46,10 @@
             DG_Clients.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DG_Clients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DG_Clients.ContextMenuStrip = CT_Context;
-            DG_Clients.Location = new Point(0, 46);
+            DG_Clients.Location = new Point(0, 80);
             DG_Clients.Name = "DG_Clients";
             DG_Clients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DG_Clients.Size = new Size(720, 343);
+            DG_Clients.Size = new Size(720, 309);
             DG_Clients.TabIndex = 0;
             DG_Clients.SelectionChanged += DG_Clients_SelectionChanged;
             DG_Clients.MouseDown += DG_Clients_MouseDown;
@@ -56,12 +58,12 @@
             // 
             CT_Context.Items.AddRange(new ToolStripItem[] { TS_SeeBooks });
             CT_Context.Name = "CT_Context";
-            CT_Context.Size = new Size(181, 48);
+            CT_Context.Size = new Size(168, 26);
             // 
             // TS_SeeBooks
             // 
             TS_SeeBooks.Name = "TS_SeeBooks";
-            TS_SeeBooks.Size = new Size(180, 22);
+            TS_SeeBooks.Size = new Size(167, 22);
             TS_SeeBooks.Text = "See Rented Books";
             TS_SeeBooks.Click += TS_SeeBooks_Click;
             // 
@@ -93,11 +95,33 @@
             BT_Select.Visible = false;
             BT_Select.Click += BT_Select_Click;
             // 
+            // BT_Import
+            // 
+            BT_Import.Location = new Point(93, 51);
+            BT_Import.Name = "BT_Import";
+            BT_Import.Size = new Size(75, 23);
+            BT_Import.TabIndex = 4;
+            BT_Import.Text = "Import";
+            BT_Import.UseVisualStyleBackColor = true;
+            BT_Import.Click += BT_Import_Click;
+            // 
+            // BT_Export
+            // 
+            BT_Export.Location = new Point(12, 51);
+            BT_Export.Name = "BT_Export";
+            BT_Export.Size = new Size(75, 23);
+            BT_Export.TabIndex = 5;
+            BT_Export.Text = "Export";
+            BT_Export.UseVisualStyleBackColor = true;
+            BT_Export.Click += BT_Export_Click;
+            // 
             // SearchClient
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 387);
+            Controls.Add(BT_Export);
+            Controls.Add(BT_Import);
             Controls.Add(BT_Select);
             Controls.Add(BT_Search);
             Controls.Add(TB_Search);
@@ -119,5 +143,7 @@
         private Button BT_Select;
         private ContextMenuStrip CT_Context;
         private ToolStripMenuItem TS_SeeBooks;
+        private Button BT_Import;
+        private Button BT_Export;
     }
 }

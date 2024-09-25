@@ -21,5 +21,15 @@ namespace BooksApplication.Services
             var objects = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
             return objects;
         }
+
+        public void ExportTxt(IEnumerable<object> list, string path)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var obj in list)
+            {
+                sb.AppendLine(obj.ToString());
+            }
+            File.WriteAllText(path, sb.ToString());
+        }
     }
 }

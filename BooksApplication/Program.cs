@@ -71,6 +71,7 @@ namespace BooksApplication
             services.AddTransient<AddBook>();
             services.AddTransient<Renting>();
             services.AddTransient<SearchClient>();
+            services.AddTransient<ExportDialog>();
 
             services.AddSingleton<IUserRepository, UserRepository>(); // REpository Pattern
             services.AddSingleton<IClientRepository, ClientRepository>();

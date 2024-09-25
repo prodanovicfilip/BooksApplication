@@ -23,7 +23,11 @@ namespace BooksApplication.DataAccess.Repositories
             _context.Clients.Add(client);
             return _context.SaveChanges();
         }
-
+        public int Add(IEnumerable<Client> client)
+        {
+            _context.Clients.AddRange(client);
+            return _context.SaveChanges();
+        }
         public void Delete(int id)
         {
             if (id <= 0) throw new ArgumentOutOfRangeException("id");
