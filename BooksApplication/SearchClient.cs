@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using BooksApplication.DataAccess.Infrastructure;
 using BooksApplication.DataAccess.Repositories;
 using BooksApplication.Services;
 using BooksApplication.Utilities;
+using Mapster;
 
 namespace BooksApplication
 {
@@ -112,7 +114,9 @@ namespace BooksApplication
                 DialogResult dialogResult = fileDialog.ShowDialog();
                 if (dialogResult == DialogResult.OK)
                 {
-                    exportService.ExportJson(_clients, fileDialog.FileName); // error!
+                    var dto = _clients.Adapt<List<BLL.Models.Client>>();
+                    exportService.ExportJson(dto, fileDialog.FileName);
+                    Process.Start("notepad.exe",fileDialog.FileName);
                 }
             }
             if (dialog.State == ExportDialog.States.Text)
@@ -123,6 +127,7 @@ namespace BooksApplication
                 if (dialogResult == DialogResult.OK)
                 {
                     exportService.ExportTxt(_clients, fileDialog.FileName);
+                    Process.Start("notepad.exe", fileDialog.FileName);
                 }
             }
         }

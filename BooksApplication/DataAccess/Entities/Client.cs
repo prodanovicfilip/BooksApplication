@@ -13,7 +13,8 @@ namespace BooksApplication.DataAccess.Entities
         public string Address { get; set; }
         public int Phone { get; set; }
         public string Email { get; set; }
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; }      
+        
         public override string ToString()
         {
             return $"{FirstName} {LastName} - Address: {Address} - Phone: {Phone} - Email: {Email}";
