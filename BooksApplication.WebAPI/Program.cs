@@ -1,4 +1,6 @@
 
+using BooksApplication.WebAPI.DataAccess;
+
 namespace BooksApplication.WebAPI
 {
     public class Program
@@ -10,6 +12,7 @@ namespace BooksApplication.WebAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<ApiContext>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
