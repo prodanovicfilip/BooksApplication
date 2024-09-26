@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
 using BooksApplication.Services;
+using BooksApplication.Services.Api;
 using BooksApplication.Utilities;
 
 namespace BooksApplication
@@ -22,7 +23,8 @@ namespace BooksApplication
             Client
         }
         private readonly IClientRepository _clientRepository;
-        private readonly IBookRepository _bookRepository;
+        //private readonly IBookRepository _bookRepository;
+        private readonly IApiService _apiService;
         private IEnumerable<Book> _books;
         private Book _selectedBook;
         private Client _selectedClient;
@@ -38,11 +40,11 @@ namespace BooksApplication
             }
         }
 
-        public Renting(IClientRepository clientRepository, IBookRepository bookRepository)
+        public Renting(IClientRepository clientRepository, IApiService apiService)
         {
             InitializeComponent();
             _clientRepository = clientRepository;
-            _bookRepository = bookRepository;
+            _apiService = apiService;
             LB_Client.Text = "Please select client";
             IsDirty = false;
         }
@@ -55,9 +57,9 @@ namespace BooksApplication
             BT_SaveClient.Visible = false;
             _formState = FormState.Client;
         }
-        private void Renting_Load(object sender, EventArgs e)
+        private async void Renting_Load(object sender, EventArgs e)
         {
-            _books = _bookRepository.GetAll().ToList();
+            _books = (await _apiService.GetAll<Book>(nameof(Book))).ToList();
             if (_books == null || _books.Count() == 0)
             {
                 MessageBox.Show("There are no books available");
@@ -129,7 +131,7 @@ namespace BooksApplication
         private void TS_Delete_Click(object sender, EventArgs e)
         {
 
-            _bookRepository.Delete(_selectedBook.Id);
+            _apiService.Delete<Book>(_selectedBook.Id);
             RentingRefresh();
         }
 
@@ -156,9 +158,9 @@ namespace BooksApplication
                     break;
             }
         }
-        private void RentingRefresh()
+        private async void RentingRefresh()
         {
-            _books = _bookRepository.GetAll().ToList();
+            _books = (await _apiService.GetAll<Book>(nameof(Book))).ToList();
             GV_Books.DataSource = _books;
         }
 
@@ -205,7 +207,7 @@ namespace BooksApplication
             
         }
 
-        private void BT_Import_Click(object sender, EventArgs e)
+        private async void BT_Import_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             var exportService = Program.GetService<IExportService>();
@@ -216,8 +218,8 @@ namespace BooksApplication
                 if (newBooks != null)
                 {
                     ResetId(newBooks);
-                    _bookRepository.Add(newBooks);
-                    _books = _bookRepository.GetAll().ToList();
+                    _apiService.Create(newBooks);
+                    _books = (await _apiService.GetAll<Book>(nameof(Book))).ToList();
                 }
             }
         }

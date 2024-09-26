@@ -5,6 +5,7 @@ using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
 using BooksApplication.DataAccess.Repositories;
 using BooksApplication.Services;
+using BooksApplication.Services.Api;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -77,6 +78,8 @@ namespace BooksApplication
             services.AddSingleton<IClientRepository, ClientRepository>();
             services.AddSingleton<IBookRepository, BookRepository>();
             services.AddSingleton<IExportService, ExportService>();
+            services.AddSingleton<HttpClient>();
+            services.AddSingleton<IApiService, ApiService>();
         }
 
         public static void BuildServiceProvider(out Form1 form)
