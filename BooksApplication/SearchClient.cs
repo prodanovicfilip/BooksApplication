@@ -12,6 +12,7 @@ using BooksApplication.DataAccess.Entities;
 using BooksApplication.DataAccess.Infrastructure;
 using BooksApplication.DataAccess.Repositories;
 using BooksApplication.Services;
+using BooksApplication.Services.Api;
 using BooksApplication.Utilities;
 using Mapster;
 
@@ -24,19 +25,20 @@ namespace BooksApplication
             Normal,
             Edit
         }
-        private readonly IClientRepository _clientRepository;
+        //private readonly IClientRepository _clientRepository;
+        private readonly IApiService _apiService;
         private List<Client> _clients;
         private FormState _formState = FormState.Normal;
         private Client _selectedClient;
-        public SearchClient(IClientRepository clientRepository)
+        public SearchClient(IApiService apiService)
         {
             InitializeComponent();
-            _clientRepository = clientRepository;
+            _apiService = apiService;
         }
 
-        private void SearchClient_Load(object sender, EventArgs e)
+        private async void SearchClient_Load(object sender, EventArgs e)
         {
-            _clients = _clientRepository.GetAll().ToList();
+            _clients = (await _apiService.GetAll<Client>(nameof(Client))).ToList();
             if (_clients == null)
             {
                 MessageBox.Show("Error");
@@ -132,7 +134,7 @@ namespace BooksApplication
             }
         }
 
-        private void BT_Import_Click(object sender, EventArgs e)
+        private async void BT_Import_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             var exportService = Program.GetService<IExportService>();
@@ -143,8 +145,8 @@ namespace BooksApplication
                 if (newClients != null)
                 {
                     ResetId(newClients);
-                    _clientRepository.Add(newClients);
-                    _clients = _clientRepository.GetAll().ToList();
+                    _apiService.Create(newClients);
+                    _clients = (await _apiService.GetAll<Client>(nameof(Client))).ToList(); ;
                 }
             }
         }
